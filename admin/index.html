@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Click.byte — Panel Admin</title>
+  <title>Click.byte — Panel de Administración</title>
+  <meta name="description" content="Panel de administración de Click.byte."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <meta name="theme-color" content="#00A8B5"/>
+  <link rel="icon" type="image/png" href="../img/logo-black.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css"/>
   <link rel="stylesheet" href="../css/admin.css"/>
 </head>
@@ -11,7 +18,7 @@
 
 <div class="login-wrap" id="login-wrap">
   <div class="login-box">
-    <div class="login-logo">Click<span>.byte</span></div>
+    <div class="login-logo"><img src="../img/logo-white.png" alt="Click.byte" class="login-logo-img"></div>
     <div class="login-sub">Panel de administración</div>
     <label for="login-password">Contraseña</label>
     <input type="password" id="login-password" placeholder="Ingresá tu contraseña"/>
@@ -22,10 +29,13 @@
 
 <div class="admin-wrap" id="admin-wrap">
   <nav class="admin-nav">
-    <div class="logo">Click<span>.byte</span></div>
+    <div class="logo"><img src="../img/logo-white.png" alt="Click.byte" class="logo-img"></div>
     <span class="badge">Admin</span>
-    <a href="../index.html" class="nav-home"><i class="ti ti-arrow-left"></i> Ver tienda</a>
-    <button class="btn-logout" id="btn-logout"><i class="ti ti-logout"></i> Salir</button>
+    <div class="admin-nav-right">
+      <a href="../index.html" class="nav-home"><i class="ti ti-arrow-left"></i> Ver tienda</a>
+      <button class="theme-btn" id="theme-btn-admin" aria-label="Cambiar tema"><i class="ti ti-moon"></i></button>
+      <button class="btn-logout" id="btn-logout"><i class="ti ti-logout"></i> Salir</button>
+    </div>
   </nav>
   <div class="admin-body">
     <aside class="admin-sidebar">

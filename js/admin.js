@@ -17,7 +17,27 @@ let db = null;
 let editingId = null;
 let productos = [];
 
+// ── THEME ──────────────────────────────────────
+function setAdminTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("cb_theme", theme);
+  const icon = document.querySelector("#theme-btn-admin i, #theme-btn i");
+  if (icon) icon.className = theme === "dark" ? "ti ti-sun" : "ti ti-moon";
+}
+
+function initAdminTheme() {
+  const saved = localStorage.getItem("cb_theme") || "light";
+  setAdminTheme(saved);
+  document.querySelectorAll("#theme-btn-admin, #theme-btn").forEach(btn => {
+    btn?.addEventListener("click", () => {
+      const cur = document.documentElement.getAttribute("data-theme");
+      setAdminTheme(cur === "dark" ? "light" : "dark");
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initAdminTheme();
   document.getElementById("btn-login").addEventListener("click", doLogin);
   document.getElementById("login-password").addEventListener("keydown", e => { if(e.key==="Enter") doLogin(); });
   document.getElementById("btn-logout").addEventListener("click", () => {

@@ -5,15 +5,20 @@
 ```
 clickbyte/
 ├── index.html           ← Tienda principal
+├── 404.html             ← Página 404 personalizada
 ├── admin/
 │   └── index.html       ← Panel de administración
 ├── css/
-│   ├── style.css        ← Estilos de la tienda
-│   └── admin.css        ← Estilos del panel admin
+│   ├── style.css        ← Estilos de la tienda + modo oscuro
+│   └── admin.css        ← Estilos del panel admin + modo oscuro
 ├── js/
-│   ├── main.js          ← Lógica de tienda + carrito + WhatsApp
-│   └── admin.js         ← Lógica del panel admin
-└── img/                 ← Imágenes locales (opcional)
+│   ├── main.js          ← Lógica de tienda + carrito + WhatsApp + tema
+│   └── admin.js         ← Lógica del panel admin + tema
+├── img/
+│   ├── logo-white.png   ← Logo blanco (fondo oscuro/color)
+│   ├── logo-black.png   ← Logo negro (fondo claro)
+│   └── logo-full.png    ← Logo completo (para OG Image)
+└── LOGOS/               ← Archivos originales del logo
 ```
 
 ---
@@ -90,6 +95,11 @@ Con los valores reales de tu proyecto Firebase. Hacé esto en **ambos archivos**
 4. Tu tienda queda en `https://tu-proyecto.vercel.app`
 5. El panel admin en `https://tu-proyecto.vercel.app/admin`
 
+> Para que la página 404 funcione en Vercel, creá un archivo `vercel.json`:
+> ```json
+> { "routes": [{ "src": "/.*", "dest": "/index.html" }] }
+> ```
+
 ---
 
 ## 🛡️ Panel Admin
@@ -135,19 +145,49 @@ Con los valores reales de tu proyecto Firebase. Hacé esto en **ambos archivos**
 
 ---
 
+## 🌙 Modo oscuro
+
+La tienda y el admin incluyen un botón de alternar modo oscuro/claro (luna/sol) en la barra de navegación. La preferencia se guarda automáticamente en `localStorage`.
+
+---
+
 ## 🎨 Cambiar colores
 
-En `css/style.css` modificá las variables:
+En `css/style.css` y `css/admin.css` modificá las variables:
 
 ```css
 :root {
-  --primary:       #f5790a;   /* naranja principal */
-  --primary-dark:  #c95f00;   /* naranja oscuro */
-  --primary-light: #fff4ea;   /* fondo suave */
-  --accent:        #ff9a3c;   /* acento */
-  --yellow:        #ffd000;   /* amarillo */
+  --primary:       #00A8B5;   /* agua marina principal */
+  --primary-dark:  #008099;   /* agua marina oscuro */
+  --primary-light: #E0F5F7;   /* fondo suave */
+  --accent:        #FF9A3C;   /* acento naranja */
+  --yellow:        #FFD000;   /* amarillo */
 }
 ```
 
 ---
+
+## 🔍 SEO / Open Graph
+
+Todas las páginas incluyen:
+- Meta tags: description, keywords, robots, theme-color
+- Open Graph: title, description, image, url, type, site_name, locale
+- Twitter Cards: summary_large_image
+- Favicon y canonical URL
+
+Actualizá el dominio en las URLs canónicas y OG antes de subir a producción.
+
+---
+
+## 📱 Comportamiento responsive
+
+La barra superior se adapta al ancho de la ventana:
+- **>1100px**: todo visible con texto
+- **1100-860px**: se ocultan los textos, quedan solo íconos
+- **860-640px**: se ocultan Mi cuenta y Favoritos
+- **640-480px**: el buscador pasa abajo del logo (full width)
+- **<480px**: logo y fuente más chicos
+
+---
+
 © 2025 Click.byte

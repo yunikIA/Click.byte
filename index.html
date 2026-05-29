@@ -4,7 +4,28 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Click.byte — Tecnología al mejor precio</title>
-  <meta name="description" content="Celulares, tablets, laptops, accesorios e insumos informáticos."/>
+  <meta name="description" content="Celulares, tablets, laptops, accesorios e insumos informáticos. Envíos a todo el país."/>
+  <meta name="keywords" content="celulares, tablets, laptops, tecnología, accesorios, informática, argentina"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#00A8B5"/>
+  <link rel="icon" type="image/png" href="img/logo-black.png"/>
+  <link rel="canonical" href="https://clickbyte.vercel.app/"/>
+  <meta property="og:title" content="Click.byte — Tecnología al mejor precio"/>
+  <meta property="og:description" content="Celulares, tablets, laptops, accesorios e insumos informáticos. Envíos a todo el país."/>
+  <meta property="og:url" content="https://clickbyte.vercel.app/"/>
+  <meta property="og:image" content="https://clickbyte.vercel.app/img/logo-full.png"/>
+  <meta property="og:image:width" content="600"/>
+  <meta property="og:image:height" content="200"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Click.byte"/>
+  <meta property="og:locale" content="es_AR"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Click.byte — Tecnología al mejor precio"/>
+  <meta name="twitter:description" content="Celulares, tablets, laptops, accesorios e insumos informáticos."/>
+  <meta name="twitter:image" content="https://clickbyte.vercel.app/img/logo-full.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css"/>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
@@ -16,30 +37,31 @@
 
 <nav class="nav">
   <div class="nav-top">
-    <a href="index.html" class="logo">Click<span>.byte</span></a>
+    <a href="index.html" class="logo"><img src="img/logo-white.png" alt="Click.byte" class="logo-img"></a>
     <div class="search-bar">
       <input type="text" placeholder="Buscá celulares, tablets, accesorios..." aria-label="Buscar"/>
       <button aria-label="Buscar"><i class="ti ti-search"></i></button>
     </div>
     <div class="nav-right">
-      <a href="#"><i class="ti ti-user"></i> Mi cuenta</a>
-      <a href="#"><i class="ti ti-heart"></i> Favoritos</a>
+      <a href="#"><i class="ti ti-user"></i> <span>Mi cuenta</span></a>
+      <a href="#"><i class="ti ti-heart"></i> <span>Favoritos</span></a>
+      <button class="theme-btn" id="theme-btn" aria-label="Cambiar tema"><i class="ti ti-moon"></i></button>
       <button class="cart-btn" id="cart-btn-nav">
-        <i class="ti ti-shopping-cart"></i> Carrito (<span class="cart-count">0</span>)
+        <i class="ti ti-shopping-cart"></i> <span class="label">Carrito (<span class="cart-count">0</span>)</span>
       </button>
     </div>
   </div>
   <div class="nav-links">
-    <a href="#">📱 Celulares</a>
-    <a href="#">💻 Computación</a>
-    <a href="#">📱 Tablets</a>
-    <a href="#">🎧 Audio</a>
-    <a href="#">⌚ Smartwatches</a>
-    <a href="#">🖨️ Impresoras</a>
-    <a href="#">🖱️ Periféricos</a>
-    <a href="#">🔌 Accesorios</a>
-    <a href="#">🎮 Gaming</a>
-    <a href="#" class="hot">🔥 Ofertas</a>
+    <a href="#"><i class="ti ti-device-mobile"></i> Celulares</a>
+    <a href="#"><i class="ti ti-device-laptop"></i> Computación</a>
+    <a href="#"><i class="ti ti-device-tablet"></i> Tablets</a>
+    <a href="#"><i class="ti ti-headphones"></i> Audio</a>
+    <a href="#"><i class="ti ti-device-watch"></i> Smartwatches</a>
+    <a href="#"><i class="ti ti-printer"></i> Impresoras</a>
+    <a href="#"><i class="ti ti-mouse"></i> Periféricos</a>
+    <a href="#"><i class="ti ti-plug"></i> Accesorios</a>
+    <a href="#"><i class="ti ti-device-gamepad-2"></i> Gaming</a>
+    <a href="#" class="hot"><i class="ti ti-flame"></i> Ofertas</a>
   </div>
 </nav>
 
@@ -102,7 +124,7 @@
 <footer class="footer">
   <div class="footer-grid">
     <div>
-      <div class="footer-logo">Click<span>.byte</span></div>
+      <div class="footer-logo"><img src="img/logo-white.png" alt="Click.byte" class="logo-img"></div>
       <p class="footer-desc">Tu tienda de tecnología de confianza. Al mejor precio.</p>
     </div>
     <div>
@@ -169,6 +191,25 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- OFFER MODAL -->
+<div class="offer-overlay" id="offer-overlay"></div>
+<div class="offer-modal" id="offer-modal">
+  <button class="offer-close" id="offer-close">✕</button>
+  <div class="offer-badge" id="offer-badge">🔥 Oferta del día</div>
+  <div class="offer-content" id="offer-content">
+    <div class="offer-img">
+      <i class="ti ti-device-mobile"></i>
+    </div>
+    <div class="offer-info">
+      <div class="offer-name">Cargando...</div>
+      <div class="offer-old" id="offer-old"></div>
+      <div class="offer-price" id="offer-price"></div>
+      <div class="offer-desc" id="offer-desc">No te pierdas esta oferta por tiempo limitado</div>
+      <button class="offer-btn" id="offer-btn">Ver producto</button>
+    </div>
+  </div>
+</div>
 
 <!-- Firebase Compat -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>

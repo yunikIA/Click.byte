@@ -240,8 +240,70 @@ function showToast(msg){
   clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove("show"),2800);
 }
 
+// ── OFFER MODAL ────────────────────────────────
+function openOfferModal(product) {
+  const overlay = document.getElementById("offer-overlay");
+  const modal = document.getElementById("offer-modal");
+  if (!overlay || !modal) return;
+  const content = document.getElementById("offer-content");
+  const nameEl = content?.querySelector(".offer-name");
+  const imgEl = content?.querySelector(".offer-img");
+  const priceEl = document.getElementById("offer-price");
+  const oldEl = document.getElementById("offer-old");
+  const descEl = document.getElementById("offer-desc");
+  const btn = document.getElementById("offer-btn");
+  if (nameEl) nameEl.textContent = product.nombre;
+  if (imgEl) imgEl.innerHTML = product.imagen ? `<img src="${product.imagen}" alt="${product.nombre}">` : `<i class="ti ti-device-mobile"></i>`;
+  if (priceEl) priceEl.textContent = `$${fmt(product.precio)}`;
+  if (oldEl && product.precioAnterior) { oldEl.textContent = `$${fmt(product.precioAnterior)}`; oldEl.style.display = "block"; }
+  if (descEl) descEl.textContent = product.descripcionCorta || "No te pierdas esta oferta por tiempo limitado";
+  if (btn) {
+    btn.onclick = () => { closeOfferModal(); document.getElementById("productos")?.scrollIntoView({ behavior: "smooth" }); };
+  }
+  overlay.classList.add("open");
+  modal.classList.add("open");
+}
+
+function closeOfferModal() {
+  document.getElementById("offer-overlay")?.classList.remove("open");
+  document.getElementById("offer-modal")?.classList.remove("open");
+}
+
+function initOfferModal() {
+  if (sessionStorage.getItem("cb_offer_shown")) return;
+  const demos = [
+    { id:"d1", nombre:"Samsung Galaxy A55 5G 256GB",       precio:349999, precioAnterior:389999, badge:"hot",  descripcionCorta:"10% OFF · Envío gratis" },
+    { id:"d2", nombre:"Lenovo IdeaPad 3 Ryzen 5 16GB",     precio:689000, precioAnterior:749999, badge:"sale", descripcionCorta:"Envío gratis · 12 cuotas" },
+    { id:"d4", nombre:"Samsung Galaxy Tab A9+ 64GB WiFi",   precio:189999, precioAnterior:219000, badge:"sale", descripcionCorta:"15% OFF · Envío gratis" },
+    { id:"d8", nombre:"Impresora Epson EcoTank L3250 WiFi", precio:169000, precioAnterior:189999, badge:"new",  descripcionCorta:"Envío gratis · 6 cuotas" },
+  ];
+  const shuffled = demos.sort(() => Math.random() - 0.5);
+  const selected = shuffled[0];
+  document.getElementById("offer-badge").textContent = `🔥 Oferta del día`;
+  openOfferModal(selected);
+  sessionStorage.setItem("cb_offer_shown", "1");
+}
+
+// ── THEME TOGGLE ───────────────────────────────
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("cb_theme", theme);
+  const icon = document.querySelector("#theme-btn i");
+  if (icon) icon.className = theme === "dark" ? "ti ti-sun" : "ti ti-moon";
+}
+
+function initTheme() {
+  const saved = localStorage.getItem("cb_theme") || "light";
+  setTheme(saved);
+  document.getElementById("theme-btn")?.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    setTheme(cur === "dark" ? "light" : "dark");
+  });
+}
+
 // ── INIT ──────────────────────────────────────
 document.addEventListener("DOMContentLoaded",()=>{
+  initTheme();
   initFirebase();
   updateCartCount();
   initSearch();
@@ -249,4 +311,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("cart-overlay")?.addEventListener("click",closeCart);
   document.getElementById("cart-close")?.addEventListener("click",closeCart);
   document.getElementById("cart-wsp-btn")?.addEventListener("click",sendToWhatsApp);
+  document.getElementById("offer-close")?.addEventListener("click",closeOfferModal);
+  document.getElementById("offer-overlay")?.addEventListener("click",closeOfferModal);
+  setTimeout(initOfferModal, 800);
 });
