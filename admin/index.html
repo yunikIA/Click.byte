@@ -40,6 +40,7 @@
   <div class="admin-body">
     <aside class="admin-sidebar">
       <div class="sidebar-item active" data-tab="productos"><i class="ti ti-package"></i> Productos</div>
+      <div class="sidebar-item" data-tab="ofertas"><i class="ti ti-flame"></i> Ofertas</div>
       <div class="sidebar-item" data-tab="config"><i class="ti ti-settings"></i> Configuración</div>
     </aside>
     <main class="admin-content">
@@ -60,6 +61,42 @@
             <thead><tr><th>Imagen</th><th>Nombre</th><th>Precio</th><th>Precio ant.</th><th>Badge</th><th>Estado</th><th>Acciones</th></tr></thead>
             <tbody id="products-tbody"><tr class="loading-row"><td colspan="7">Cargando...</td></tr></tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-ofertas" style="display:none">
+        <h2>Oferta del día</h2>
+        <div class="alert" id="offer-alert"></div>
+        <div class="config-box">
+          <h3><i class="ti ti-flame"></i> Configurar oferta emergente</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5">Esta oferta aparece al abrir la tienda. Si está activa, se muestra una vez por sesión.</p>
+          <div class="form-row">
+            <label>Activar oferta</label>
+            <select id="offer-activo">
+              <option value="true">Sí, mostrar oferta</option>
+              <option value="false">No, desactivada</option>
+            </select>
+          </div>
+          <div class="form-row"><label>Nombre del producto</label><input type="text" id="offer-nombre" placeholder="Ej: Notebook Lenovo IdeaPad 3"/></div>
+          <div class="form-cols">
+            <div class="form-row"><label>Precio ($)</label><input type="number" id="offer-precio" placeholder="689000"/></div>
+            <div class="form-row"><label>Precio anterior ($)</label><input type="number" id="offer-precio-ant" placeholder="749999"/></div>
+          </div>
+          <div class="form-row"><label>Descripción corta</label><input type="text" id="offer-desc" placeholder="Envío gratis · 12 cuotas"/></div>
+          <div class="form-row">
+            <label>Imagen de la oferta</label>
+            <div class="upload-area" id="offer-upload-area">
+              <i class="ti ti-cloud-upload" id="offer-upload-icon"></i>
+              <span id="offer-upload-text">Hacé click para subir una imagen</span>
+              <div class="upload-spinner" id="offer-upload-spinner"><i class="ti ti-loader"></i> Subiendo a Cloudinary...</div>
+              <img class="upload-preview" id="offer-upload-preview" alt=""/>
+              <input type="file" id="offer-file-input" accept="image/*"/>
+            </div>
+            <input type="hidden" id="offer-image-url"/>
+          </div>
+        </div>
+        <div style="margin-top:20px">
+          <button class="btn-primary" id="btn-save-offer"><i class="ti ti-device-floppy"></i> Guardar oferta</button>
         </div>
       </div>
 

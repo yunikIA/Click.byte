@@ -271,15 +271,33 @@ function closeOfferModal() {
 
 function initOfferModal() {
   if (sessionStorage.getItem("cb_offer_shown")) return;
+  try {
+    if (db) {
+      db.collection("config").doc("store").get().then(doc => {
+        if (doc.exists) {
+          const offer = doc.data().offer || {};
+          if (offer.activo && offer.nombre && offer.precio) {
+            openOfferModal(offer);
+            sessionStorage.setItem("cb_offer_shown", "1");
+            return;
+          }
+        }
+        showDemoOffer();
+      }).catch(() => showDemoOffer());
+    } else {
+      showDemoOffer();
+    }
+  } catch(e) { showDemoOffer(); }
+}
+
+function showDemoOffer() {
   const demos = [
-    { id:"d1", nombre:"Samsung Galaxy A55 5G 256GB",       precio:349999, precioAnterior:389999, badge:"hot",  descripcionCorta:"10% OFF · Envío gratis" },
-    { id:"d2", nombre:"Lenovo IdeaPad 3 Ryzen 5 16GB",     precio:689000, precioAnterior:749999, badge:"sale", descripcionCorta:"Envío gratis · 12 cuotas" },
-    { id:"d4", nombre:"Samsung Galaxy Tab A9+ 64GB WiFi",   precio:189999, precioAnterior:219000, badge:"sale", descripcionCorta:"15% OFF · Envío gratis" },
-    { id:"d8", nombre:"Impresora Epson EcoTank L3250 WiFi", precio:169000, precioAnterior:189999, badge:"new",  descripcionCorta:"Envío gratis · 6 cuotas" },
+    { nombre:"Samsung Galaxy A55 5G 256GB",       precio:349999, precioAnterior:389999, descripcionCorta:"10% OFF · Envío gratis" },
+    { nombre:"Lenovo IdeaPad 3 Ryzen 5 16GB",     precio:689000, precioAnterior:749999, descripcionCorta:"Envío gratis · 12 cuotas" },
+    { nombre:"Samsung Galaxy Tab A9+ 64GB WiFi",   precio:189999, precioAnterior:219000, descripcionCorta:"15% OFF · Envío gratis" },
+    { nombre:"Impresora Epson EcoTank L3250 WiFi", precio:169000, precioAnterior:189999, descripcionCorta:"Envío gratis · 6 cuotas" },
   ];
-  const shuffled = demos.sort(() => Math.random() - 0.5);
-  const selected = shuffled[0];
-  document.getElementById("offer-badge").textContent = `🔥 Oferta del día`;
+  const selected = demos.sort(() => Math.random() - 0.5)[0];
   openOfferModal(selected);
   sessionStorage.setItem("cb_offer_shown", "1");
 }

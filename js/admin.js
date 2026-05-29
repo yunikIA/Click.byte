@@ -54,6 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("file-input").addEventListener("change", handleImageUpload);
   document.getElementById("btn-save-config").addEventListener("click", saveConfig);
   document.getElementById("table-search").addEventListener("input", filterTable);
+  document.getElementById("offer-upload-area")?.addEventListener("click", () => document.getElementById("offer-file-input")?.click());
+  document.getElementById("offer-file-input")?.addEventListener("change", handleOfferImageUpload);
+  document.getElementById("btn-save-offer")?.addEventListener("click", saveOffer);
 });
 
 function doLogin() {
@@ -81,7 +84,7 @@ function switchTab(tab) {
   document.querySelectorAll(".tab-content").forEach(t => t.style.display = t.id===`tab-${tab}` ? "block" : "none");
 }
 
-function loadAdminData() { loadStats(); loadProductsTable(); loadConfigForm(); switchTab("productos"); }
+function loadAdminData() { loadStats(); loadProductsTable(); loadConfigForm(); loadOfferForm(); switchTab("productos"); }
 
 async function loadStats() {
   try {
@@ -250,4 +253,68 @@ async function saveConfig() {
     alertEl.className="alert success show"; alertEl.textContent="Configuración guardada ✓";
     setTimeout(()=>alertEl.className="alert",2500);
   } catch(err){ alertEl.className="alert error show"; alertEl.textContent="Error: "+err.message; }
+}
+
+// ── OFERTAS ─────────────────────────────────────
+async function loadOfferForm() {
+  try {
+    const doc = await db.collection("config").doc("store").get();
+    if (doc.exists) {
+      const d = doc.data().offer || {};
+      document.getElementById("offer-activo").value      = d.activo !== false ? "true" : "false";
+      document.getElementById("offer-nombre").value       = d.nombre || "";
+      document.getElementById("offer-precio").value       = d.precio || "";
+      document.getElementById("offer-precio-ant").value   = d.precioAnterior || "";
+      document.getElementById("offer-desc").value         = d.descripcionCorta || "";
+      document.getElementById("offer-image-url").value    = d.imagen || "";
+      if (d.imagen) {
+        const prev = document.getElementById("offer-upload-preview");
+        prev.src = d.imagen; prev.style.display = "block";
+        document.getElementById("offer-upload-icon").style.display = "none";
+        document.getElementById("offer-upload-text").textContent = "Imagen actual (click para cambiar)";
+      }
+    }
+  } catch(e) {}
+}
+
+async function handleOfferImageUpload(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const spinner = document.getElementById("offer-upload-spinner");
+  const preview = document.getElementById("offer-upload-preview");
+  const icon    = document.getElementById("offer-upload-icon");
+  const text    = document.getElementById("offer-upload-text");
+  spinner.style.display = "block"; text.textContent = "Subiendo..."; icon.style.display = "none"; preview.style.display = "none";
+  try {
+    const fd = new FormData();
+    fd.append("file", file); fd.append("upload_preset", CLOUDINARY_PRESET); fd.append("folder", "clickbyte");
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method: "POST", body: fd });
+    const data = await res.json();
+    if (data.secure_url) {
+      document.getElementById("offer-image-url").value = data.secure_url;
+      preview.src = data.secure_url; preview.style.display = "block";
+      text.textContent = "Imagen subida ✓ (click para cambiar)";
+    } else throw new Error(data.error?.message || "Error");
+  } catch(err) { text.textContent = "Error al subir. Intentá de nuevo."; icon.style.display = "block"; console.error(err); }
+  finally { spinner.style.display = "none"; }
+}
+
+async function saveOffer() {
+  const alertEl = document.getElementById("offer-alert"); alertEl.className = "alert";
+  const nombre = document.getElementById("offer-nombre").value.trim();
+  if (!nombre) { alertEl.className = "alert error show"; alertEl.textContent = "El nombre del producto es obligatorio."; return; }
+  try {
+    const data = {
+      offer: {
+        activo:          document.getElementById("offer-activo").value === "true",
+        nombre,
+        precio:          parseFloat(document.getElementById("offer-precio").value) || 0,
+        precioAnterior:  parseFloat(document.getElementById("offer-precio-ant").value) || null,
+        descripcionCorta: document.getElementById("offer-desc").value.trim(),
+        imagen:          document.getElementById("offer-image-url").value || "",
+      }
+    };
+    await db.collection("config").doc("store").set(data, { merge: true });
+    alertEl.className = "alert success show"; alertEl.textContent = "Oferta guardada ✓";
+    setTimeout(() => alertEl.className = "alert", 2500);
+  } catch(err) { alertEl.className = "alert error show"; alertEl.textContent = "Error: " + err.message; }
 }
