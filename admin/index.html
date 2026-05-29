@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Click.byte — Panel Admin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css"/>
+  <link rel="stylesheet" href="../css/admin.css"/>
+</head>
+<body>
+
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">Click<span>.byte</span></div>
+    <div class="login-sub">Panel de administración</div>
+    <label for="login-password">Contraseña</label>
+    <input type="password" id="login-password" placeholder="Ingresá tu contraseña"/>
+    <button class="btn-login" id="btn-login">Ingresar</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<div class="admin-wrap" id="admin-wrap">
+  <nav class="admin-nav">
+    <div class="logo">Click<span>.byte</span></div>
+    <span class="badge">Admin</span>
+    <a href="../index.html" class="nav-home"><i class="ti ti-arrow-left"></i> Ver tienda</a>
+    <button class="btn-logout" id="btn-logout"><i class="ti ti-logout"></i> Salir</button>
+  </nav>
+  <div class="admin-body">
+    <aside class="admin-sidebar">
+      <div class="sidebar-item active" data-tab="productos"><i class="ti ti-package"></i> Productos</div>
+      <div class="sidebar-item" data-tab="config"><i class="ti ti-settings"></i> Configuración</div>
+    </aside>
+    <main class="admin-content">
+
+      <div class="tab-content" id="tab-productos">
+        <h2>Gestión de productos</h2>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-label">Total</div><div class="stat-val" id="stat-total">—</div></div>
+          <div class="stat-card"><div class="stat-label">Activos</div><div class="stat-val" id="stat-activos">—</div></div>
+          <div class="stat-card"><div class="stat-label">Inactivos</div><div class="stat-val" id="stat-inactivos">—</div></div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-toolbar">
+            <input type="text" id="table-search" placeholder="🔍 Buscar producto..."/>
+            <button class="btn-primary" id="btn-new-product"><i class="ti ti-plus"></i> Nuevo producto</button>
+          </div>
+          <table>
+            <thead><tr><th>Imagen</th><th>Nombre</th><th>Precio</th><th>Precio ant.</th><th>Badge</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="products-tbody"><tr class="loading-row"><td colspan="7">Cargando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-config" style="display:none">
+        <h2>Configuración de la tienda</h2>
+        <div class="alert" id="cfg-alert"></div>
+        <div class="config-box">
+          <h3><i class="ti ti-brand-whatsapp"></i> WhatsApp y pagos</h3>
+          <div class="form-row"><label>Número de WhatsApp (sin +)</label><input type="text" id="cfg-whatsapp" placeholder="5491176256401"/></div>
+          <div class="form-row"><label>Alias de transferencia</label><input type="text" id="cfg-alias" placeholder="montes0899"/></div>
+          <div class="form-row"><label>CBU (opcional)</label><input type="text" id="cfg-cbu" placeholder="CBU de tu cuenta"/></div>
+        </div>
+        <div class="config-box" style="margin-top:16px">
+          <h3><i class="ti ti-store"></i> Tienda</h3>
+          <div class="form-row"><label>Nombre de la tienda</label><input type="text" id="cfg-storename" placeholder="Click.byte"/></div>
+        </div>
+        <div class="config-box" style="margin-top:16px">
+          <h3><i class="ti ti-lock"></i> Seguridad</h3>
+          <div class="form-row"><label>Nueva contraseña (dejá vacío para no cambiar)</label><input type="password" id="cfg-password" placeholder="Nueva contraseña..."/></div>
+        </div>
+        <div style="margin-top:20px">
+          <button class="btn-primary" id="btn-save-config"><i class="ti ti-device-floppy"></i> Guardar configuración</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Nuevo producto</h3>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert" id="save-alert"></div>
+      <div class="form-row"><label>Nombre *</label><input type="text" id="prod-nombre" placeholder="Ej: Samsung Galaxy A55 5G"/></div>
+      <div class="form-cols">
+        <div class="form-row"><label>Precio ($) *</label><input type="number" id="prod-precio" placeholder="349999"/></div>
+        <div class="form-row"><label>Precio anterior ($)</label><input type="number" id="prod-precio-ant" placeholder="389999"/></div>
+      </div>
+      <div class="form-cols">
+        <div class="form-row">
+          <label>Badge</label>
+          <select id="prod-badge">
+            <option value="">Sin badge</option>
+            <option value="hot">🔥 Más vendido</option>
+            <option value="sale">💰 Oferta</option>
+            <option value="new">✨ Nuevo</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Estado</label>
+          <select id="prod-activo">
+            <option value="true">Activo (visible)</option>
+            <option value="false">Inactivo (oculto)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row"><label>Descripción corta (en la tarjeta)</label><input type="text" id="prod-desc-corta" placeholder="10% OFF · Envío gratis"/></div>
+      <div class="form-row"><label>Descripción completa (opcional)</label><textarea id="prod-desc" placeholder="Descripción detallada..."></textarea></div>
+      <div class="form-row"><label>Orden (menor = primero)</label><input type="number" id="prod-orden" placeholder="0"/></div>
+      <div class="form-row">
+        <label>Imagen del producto</label>
+        <div class="upload-area" id="upload-area">
+          <i class="ti ti-cloud-upload" id="upload-icon"></i>
+          <span id="upload-text">Hacé click para subir una imagen</span>
+          <div class="upload-spinner" id="upload-spinner"><i class="ti ti-loader"></i> Subiendo a Cloudinary...</div>
+          <img class="upload-preview" id="upload-preview" alt=""/>
+          <input type="file" id="file-input" accept="image/*"/>
+        </div>
+        <input type="hidden" id="current-image-url"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="btn-cancel">Cancelar</button>
+      <button class="btn-primary" id="btn-save"><i class="ti ti-device-floppy"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

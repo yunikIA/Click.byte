@@ -1,401 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Click.byte — Tecnología al mejor precio</title>
-  <meta name="description" content="Tu tienda de tecnología: celulares, tablets, laptops, accesorios e insumos informáticos al mejor precio." />
-
-  <!-- Iconos Tabler -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css" />
-
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="Celulares, tablets, laptops, accesorios e insumos informáticos."/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-  <!-- ── BARRA DE ANUNCIO ─────────────────────── -->
-  <div class="announce">
-    🚚 <strong>Envío gratis</strong> en compras mayores a $50.000 &nbsp;·&nbsp;
-    Hasta 12 cuotas sin interés con tarjetas seleccionadas
-  </div>
+<div class="announce">
+  🚚 <strong>Envío gratis</strong> en compras mayores a $50.000 &nbsp;·&nbsp; Hasta 12 cuotas sin interés
+</div>
 
-  <!-- ── NAVBAR ──────────────────────────────── -->
-  <nav class="nav">
-    <div class="nav-top">
-      <a href="index.html" class="logo">Click<span>.byte</span></a>
-
-      <div class="search-bar">
-        <input type="text" placeholder="Buscá celulares, tablets, accesorios..." aria-label="Buscar productos" />
-        <button aria-label="Buscar">
-          <i class="ti ti-search"></i>
-        </button>
-      </div>
-
-      <div class="nav-right">
-        <a href="#"><i class="ti ti-user"></i> Mi cuenta</a>
-        <a href="#"><i class="ti ti-heart"></i> Favoritos</a>
-        <button class="cart-btn">
-          <i class="ti ti-shopping-cart"></i>
-          Carrito (<span class="cart-count">0</span>)
-        </button>
-      </div>
+<nav class="nav">
+  <div class="nav-top">
+    <a href="index.html" class="logo">Click<span>.byte</span></a>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscá celulares, tablets, accesorios..." aria-label="Buscar"/>
+      <button aria-label="Buscar"><i class="ti ti-search"></i></button>
     </div>
-
-    <div class="nav-links">
-      <a href="#">📱 Celulares</a>
-      <a href="#">💻 Computación</a>
-      <a href="#">📱 Tablets</a>
-      <a href="#">🎧 Audio</a>
-      <a href="#">⌚ Smartwatches</a>
-      <a href="#">🖨️ Impresoras</a>
-      <a href="#">🖱️ Periféricos</a>
-      <a href="#">🔌 Accesorios</a>
-      <a href="#">🎮 Gaming</a>
-      <a href="#">📷 Cámaras</a>
-      <a href="#" class="hot">🔥 Ofertas</a>
-    </div>
-  </nav>
-
-  <!-- ── HERO ──────────────────────────────────── -->
-  <section class="hero">
-    <div class="hero-text">
-      <span class="hero-badge">🔥 Ofertas de temporada</span>
-      <h1>Tecnología al mejor precio,<br>en un click</h1>
-      <p>Celulares, tablets, computadoras y accesorios.<br>Envíos a todo el país con las mejores marcas.</p>
-      <button class="hero-cta" onclick="document.querySelector('#productos').scrollIntoView({behavior:'smooth'})">
-        Ver todas las ofertas →
+    <div class="nav-right">
+      <a href="#"><i class="ti ti-user"></i> Mi cuenta</a>
+      <a href="#"><i class="ti ti-heart"></i> Favoritos</a>
+      <button class="cart-btn" id="cart-btn-nav">
+        <i class="ti ti-shopping-cart"></i> Carrito (<span class="cart-count">0</span>)
       </button>
     </div>
+  </div>
+  <div class="nav-links">
+    <a href="#">📱 Celulares</a>
+    <a href="#">💻 Computación</a>
+    <a href="#">📱 Tablets</a>
+    <a href="#">🎧 Audio</a>
+    <a href="#">⌚ Smartwatches</a>
+    <a href="#">🖨️ Impresoras</a>
+    <a href="#">🖱️ Periféricos</a>
+    <a href="#">🔌 Accesorios</a>
+    <a href="#">🎮 Gaming</a>
+    <a href="#" class="hot">🔥 Ofertas</a>
+  </div>
+</nav>
 
-    <div class="hero-visual">
-      <div class="hero-card">
-        <i class="ti ti-device-mobile"></i>
-        <span>Celulares</span>
-      </div>
-      <div class="hero-card">
-        <i class="ti ti-device-laptop"></i>
-        <span>Laptops</span>
-      </div>
-      <div class="hero-card">
-        <i class="ti ti-device-tablet"></i>
-        <span>Tablets</span>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-badge">🔥 Ofertas de temporada</span>
+    <h1>Tecnología al mejor precio,<br>en un click</h1>
+    <p>Celulares, tablets, computadoras y accesorios.<br>Envíos a todo el país.</p>
+    <button class="hero-cta" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">
+      Ver todas las ofertas →
+    </button>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card"><i class="ti ti-device-mobile"></i><span>Celulares</span></div>
+    <div class="hero-card"><i class="ti ti-device-laptop"></i><span>Laptops</span></div>
+    <div class="hero-card"><i class="ti ti-device-tablet"></i><span>Tablets</span></div>
+  </div>
+</section>
 
-  <!-- ── CATEGORÍAS ─────────────────────────────── -->
-  <section class="section">
-    <div class="section-title">Explorá por categoría</div>
-    <div class="cats-grid">
-      <div class="cat-card"><i class="ti ti-device-mobile"></i><span>Celulares</span></div>
-      <div class="cat-card"><i class="ti ti-device-laptop"></i><span>Laptops</span></div>
-      <div class="cat-card"><i class="ti ti-device-tablet"></i><span>Tablets</span></div>
-      <div class="cat-card"><i class="ti ti-headphones"></i><span>Audio</span></div>
-      <div class="cat-card"><i class="ti ti-printer"></i><span>Impresoras</span></div>
-      <div class="cat-card"><i class="ti ti-mouse"></i><span>Periféricos</span></div>
-      <div class="cat-card"><i class="ti ti-device-watch"></i><span>Smartwatch</span></div>
-      <div class="cat-card"><i class="ti ti-plug"></i><span>Cables</span></div>
-      <div class="cat-card"><i class="ti ti-camera"></i><span>Cámaras</span></div>
-      <div class="cat-card"><i class="ti ti-cpu"></i><span>Componentes</span></div>
-      <div class="cat-card"><i class="ti ti-device-gamepad-2"></i><span>Gaming</span></div>
-      <div class="cat-card"><i class="ti ti-battery-charging"></i><span>Energía</span></div>
-    </div>
-  </section>
+<div class="section">
+  <div class="section-title">Explorá por categoría</div>
+  <div class="cats-grid">
+    <div class="cat-card"><i class="ti ti-device-mobile"></i><span>Celulares</span></div>
+    <div class="cat-card"><i class="ti ti-device-laptop"></i><span>Laptops</span></div>
+    <div class="cat-card"><i class="ti ti-device-tablet"></i><span>Tablets</span></div>
+    <div class="cat-card"><i class="ti ti-headphones"></i><span>Audio</span></div>
+    <div class="cat-card"><i class="ti ti-printer"></i><span>Impresoras</span></div>
+    <div class="cat-card"><i class="ti ti-mouse"></i><span>Periféricos</span></div>
+    <div class="cat-card"><i class="ti ti-device-watch"></i><span>Smartwatch</span></div>
+    <div class="cat-card"><i class="ti ti-plug"></i><span>Cables</span></div>
+    <div class="cat-card"><i class="ti ti-camera"></i><span>Cámaras</span></div>
+    <div class="cat-card"><i class="ti ti-cpu"></i><span>Componentes</span></div>
+    <div class="cat-card"><i class="ti ti-device-gamepad-2"></i><span>Gaming</span></div>
+    <div class="cat-card"><i class="ti ti-battery-charging"></i><span>Energía</span></div>
+  </div>
+</div>
 
-  <!-- ── BANNERS PROMOCIONALES ──────────────────── -->
-  <div class="banner-row">
-    <div class="banner banner-a">
-      <h3>Smartphones desde $150.000</h3>
-      <p>Samsung, Motorola, Xiaomi y más marcas líderes</p>
-      <span class="banner-tag">Ver ofertas →</span>
-    </div>
-    <div class="banner banner-b">
-      <h3>Laptops con 12 cuotas sin interés</h3>
-      <p>Lenovo, HP, Dell y Asus al precio más bajo del mercado</p>
-      <span class="banner-tag">Comprá ahora →</span>
+<div class="banner-row">
+  <div class="banner banner-a">
+    <h3>Smartphones desde $150.000</h3>
+    <p>Samsung, Motorola, Xiaomi y más marcas líderes</p>
+    <span class="banner-tag">Ver ofertas →</span>
+  </div>
+  <div class="banner banner-b">
+    <h3>Laptops con 12 cuotas sin interés</h3>
+    <p>Lenovo, HP, Dell y Asus al precio más bajo</p>
+    <span class="banner-tag">Comprá ahora →</span>
+  </div>
+</div>
+
+<section class="section" id="productos">
+  <div class="section-title">Productos</div>
+  <div class="prod-grid" id="prod-grid">
+    <div class="empty-state" style="grid-column:1/-1">
+      <i class="ti ti-loader"></i><p>Cargando productos...</p>
     </div>
   </div>
+</section>
 
-  <!-- ── PRODUCTOS ──────────────────────────────── -->
-  <section class="section" id="productos">
-    <div class="section-title">Productos más vendidos</div>
-    <div class="prod-grid">
-
-      <!-- Producto 1 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-device-mobile"></i>
-          <button class="prod-fav" data-name="Samsung Galaxy A55 5G 256GB" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-hot">MÁS VENDIDO</span>
-          <div class="prod-name">Samsung Galaxy A55 5G 256GB</div>
-          <div class="prod-old">$389.999</div>
-          <div class="prod-price">$349.999</div>
-          <div class="prod-desc">10% OFF · Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 2 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-device-laptop"></i>
-          <button class="prod-fav" data-name="Lenovo IdeaPad 3 Ryzen 5" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-sale">OFERTA</span>
-          <div class="prod-name">Lenovo IdeaPad 3 Ryzen 5 16GB SSD 512</div>
-          <div class="prod-old">$749.999</div>
-          <div class="prod-price">$689.000</div>
-          <div class="prod-desc">Envío gratis · 12 cuotas</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 3 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-headphones"></i>
-          <button class="prod-fav" data-name="Sony WH-1000XM5" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-new">NUEVO</span>
-          <div class="prod-name">Auriculares Sony WH-1000XM5 Noise Cancel</div>
-          <div class="prod-old">$289.999</div>
-          <div class="prod-price">$259.999</div>
-          <div class="prod-desc">Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 4 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-device-tablet"></i>
-          <button class="prod-fav" data-name="Samsung Galaxy Tab A9+" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-sale">OFERTA</span>
-          <div class="prod-name">Samsung Galaxy Tab A9+ 64GB WiFi</div>
-          <div class="prod-old">$219.000</div>
-          <div class="prod-price">$189.999</div>
-          <div class="prod-desc">15% OFF · Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 5 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-mouse"></i>
-          <button class="prod-fav" data-name="Logitech MX Master 3S" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-new">NUEVO</span>
-          <div class="prod-name">Mouse Logitech MX Master 3S Inalámbrico</div>
-          <div class="prod-old">$89.999</div>
-          <div class="prod-price">$74.999</div>
-          <div class="prod-desc">Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 6 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-cpu"></i>
-          <button class="prod-fav" data-name="SSD Kingston NV3 1TB" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-hot">MÁS VENDIDO</span>
-          <div class="prod-name">SSD Kingston NV3 1TB M.2 NVMe</div>
-          <div class="prod-old">$69.999</div>
-          <div class="prod-price">$59.999</div>
-          <div class="prod-desc">Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 7 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-device-watch"></i>
-          <button class="prod-fav" data-name="Xiaomi Redmi Watch 4" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-sale">OFERTA</span>
-          <div class="prod-name">Xiaomi Redmi Watch 4 GPS Amoled</div>
-          <div class="prod-old">$79.999</div>
-          <div class="prod-price">$64.999</div>
-          <div class="prod-desc">20% OFF</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 8 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-printer"></i>
-          <button class="prod-fav" data-name="Epson EcoTank L3250" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-new">NUEVO</span>
-          <div class="prod-name">Impresora Epson EcoTank L3250 WiFi Color</div>
-          <div class="prod-old">$189.999</div>
-          <div class="prod-price">$169.000</div>
-          <div class="prod-desc">Envío gratis · 6 cuotas</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 9 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-keyboard"></i>
-          <button class="prod-fav" data-name="Teclado Mecánico Redragon K552" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-sale">OFERTA</span>
-          <div class="prod-name">Teclado Mecánico Redragon K552 RGB</div>
-          <div class="prod-old">$54.999</div>
-          <div class="prod-price">$44.999</div>
-          <div class="prod-desc">18% OFF · Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 10 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-device-mobile"></i>
-          <button class="prod-fav" data-name="Motorola Edge 50 Pro" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-new">NUEVO</span>
-          <div class="prod-name">Motorola Edge 50 Pro 256GB Cámara 50MP</div>
-          <div class="prod-old">$459.000</div>
-          <div class="prod-price">$419.999</div>
-          <div class="prod-desc">Envío gratis · 6 cuotas</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 11 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-camera"></i>
-          <button class="prod-fav" data-name="Cámara Canon EOS R50" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-hot">DESTACADO</span>
-          <div class="prod-name">Cámara Canon EOS R50 Mirrorless 24MP</div>
-          <div class="prod-old">$1.199.000</div>
-          <div class="prod-price">$1.089.000</div>
-          <div class="prod-desc">Envío gratis · 12 cuotas</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <!-- Producto 12 -->
-      <div class="prod-card">
-        <div class="prod-img">
-          <i class="ti ti-battery-charging"></i>
-          <button class="prod-fav" data-name="Powerbank Anker 20000mAh" title="Favorito">
-            <i class="ti ti-heart"></i>
-          </button>
-        </div>
-        <div class="prod-info">
-          <span class="badge badge-sale">OFERTA</span>
-          <div class="prod-name">Powerbank Anker 20000mAh 65W Carga Rápida</div>
-          <div class="prod-old">$49.999</div>
-          <div class="prod-price">$39.999</div>
-          <div class="prod-desc">20% OFF · Envío gratis</div>
-          <button class="prod-btn">Agregar al carrito</button>
-        </div>
-      </div>
-
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Click<span>.byte</span></div>
+      <p class="footer-desc">Tu tienda de tecnología de confianza. Al mejor precio.</p>
     </div>
-  </section>
-
-  <!-- ── FOOTER ──────────────────────────────── -->
-  <footer class="footer">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">Click<span>.byte</span></div>
-        <p class="footer-desc">Tu tienda de tecnología de confianza. Celulares, computación, accesorios y más, al mejor precio.</p>
-      </div>
-      <div>
-        <h4>Categorías</h4>
-        <ul>
-          <li><a href="#">Celulares y smartphones</a></li>
-          <li><a href="#">Laptops y computadoras</a></li>
-          <li><a href="#">Tablets</a></li>
-          <li><a href="#">Audio y headphones</a></li>
-          <li><a href="#">Insumos informáticos</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Ayuda</h4>
-        <ul>
-          <li><a href="#">Preguntas frecuentes</a></li>
-          <li><a href="#">Seguí tu pedido</a></li>
-          <li><a href="#">Política de devoluciones</a></li>
-          <li><a href="#">Garantía</a></li>
-          <li><a href="#">Contacto</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Medios de pago</h4>
-        <ul>
-          <li><a href="#"><i class="ti ti-credit-card"></i> Tarjetas de crédito</a></li>
-          <li><a href="#"><i class="ti ti-credit-card"></i> Débito</a></li>
-          <li><a href="#"><i class="ti ti-building-bank"></i> Transferencia</a></li>
-          <li><a href="#"><i class="ti ti-cash"></i> Efectivo</a></li>
-          <li><a href="#"><i class="ti ti-brand-mercado-pago"></i> MercadoPago</a></li>
-        </ul>
-      </div>
+    <div>
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="#">Celulares y smartphones</a></li>
+        <li><a href="#">Laptops y computadoras</a></li>
+        <li><a href="#">Tablets</a></li>
+        <li><a href="#">Audio y headphones</a></li>
+        <li><a href="#">Insumos informáticos</a></li>
+      </ul>
     </div>
-
-    <div class="trust-badges">
-      <span class="trust-badge"><i class="ti ti-truck"></i> Envíos a todo el país</span>
-      <span class="trust-badge"><i class="ti ti-shield-check"></i> Compra protegida</span>
-      <span class="trust-badge"><i class="ti ti-rotate-clockwise"></i> 30 días de garantía</span>
-      <span class="trust-badge"><i class="ti ti-headset"></i> Soporte 24/7</span>
+    <div>
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="#">Preguntas frecuentes</a></li>
+        <li><a href="#">Seguí tu pedido</a></li>
+        <li><a href="#">Devoluciones</a></li>
+        <li><a href="#">Garantía</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
     </div>
-
-    <div class="footer-bottom">
-      © 2025 Click.byte · Todos los derechos reservados
+    <div>
+      <h4>Medios de pago</h4>
+      <ul>
+        <li><a href="#"><i class="ti ti-credit-card"></i> Tarjetas</a></li>
+        <li><a href="#"><i class="ti ti-building-bank"></i> Transferencia</a></li>
+        <li><a href="#"><i class="ti ti-cash"></i> Efectivo</a></li>
+        <li><a href="#"><i class="ti ti-truck-delivery"></i> Contra entrega</a></li>
+      </ul>
     </div>
-  </footer>
+  </div>
+  <div class="trust-badges">
+    <span class="trust-badge"><i class="ti ti-truck"></i> Envíos a todo el país</span>
+    <span class="trust-badge"><i class="ti ti-shield-check"></i> Compra protegida</span>
+    <span class="trust-badge"><i class="ti ti-rotate-clockwise"></i> 30 días de garantía</span>
+    <span class="trust-badge"><i class="ti ti-headset"></i> Soporte 24/7</span>
+  </div>
+  <div class="footer-bottom">© 2025 Click.byte · Todos los derechos reservados</div>
+</footer>
 
-  <!-- Toast de notificación -->
-  <div class="toast" id="toast"></div>
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h2><i class="ti ti-shopping-cart"></i> Mi carrito</h2>
+    <button class="cart-close" id="cart-close">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty"><i class="ti ti-shopping-cart-off"></i><p>Tu carrito está vacío</p></div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cart-total-val">$0</strong>
+    </div>
+    <button class="cart-wsp-btn" id="cart-wsp-btn" disabled>
+      <i class="ti ti-brand-whatsapp"></i> Finalizar pedido por WhatsApp
+    </button>
+    <div class="payment-info">
+      💳 Pagá por <strong>transferencia</strong> (alias/CBU), <strong>efectivo</strong> o <strong>contra entrega</strong>
+    </div>
+  </div>
+</div>
 
-  <!-- JS propio -->
-  <script src="js/main.js"></script>
+<div class="toast" id="toast"></div>
+
+<!-- Firebase Compat -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
